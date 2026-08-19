@@ -3,7 +3,8 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-
+@onready var head = $Head
+const turnspeed = 0.01
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -26,3 +27,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func _input(event: InputEvent) -> void:
+	if event == InputEventMouseMotion:
+		
+		var vector = Vector3()
+		
+		head.look_at()
