@@ -1,23 +1,41 @@
 extends CharacterBody3D
 
+@onready var head = $Head
+@onready var spotlight = $Head/SpotLight3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-@onready var head = $Head
-const turnspeed = 0.01
+const rotation_speed = 0.01
+
+var is_locked = true
+var spotlightenabled = true
 
 func _physics_process(delta: float) -> void:
+	if is_locked == true:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	elif is_locked == false:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	if Input.is_action_just_pressed("Esc"):
+		is_locked = !is_locked
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+	
+	if Input.is_action_just_pressed("F"):
+		print("F has been pressed")
+		spotlightenabled = !spotlightenabled
+		if spotlightenabled == false:
+			print("Spotlight range is 0 changing it")
+			spotlight.spot_range = 4.212
+		else:
+			print("Spotlight range was 4.212 Changing it")
+			spotlight.spot_range = 0
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir := Input.get_vector("Left", "Right", "Forward", "Backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -28,9 +46,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _input(event: InputEvent) -> void:
-	if event == InputEventMouseMotion:
-		
-		var vector = Vector3()
-		
-		head.look_at()
+func _unhandled_input(event: InputEvent) -> void:
+	if is_locked == true:
+		if event is InputEventMouseMotion:
+			var mouse_motion_event: InputEventMouseMotion = event as InputEventMouseMotion
+			rotation.y -= mouse_motion_event.relative.x * rotation_speed
+			head.rotation.x -= mouse_motion_event.relative.y * rotation_speed
+			head.rotation.x = clampf(head.rotation.x, PI/-2, PI/2)
