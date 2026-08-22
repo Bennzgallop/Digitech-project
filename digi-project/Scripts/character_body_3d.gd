@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var head = $Head
 @onready var spotlight = $Head/SpotLight3D
-
+@export var Pausemenu : Control
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const rotation_speed = 0.01
@@ -19,7 +19,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if Input.is_action_just_pressed("Esc"):
-		is_locked = !is_locked
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		get_tree().paused = true
+		Pausemenu.visible = true
+		
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
