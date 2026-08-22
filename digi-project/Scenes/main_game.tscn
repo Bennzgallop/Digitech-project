@@ -1,23 +1,27 @@
-[gd_scene load_steps=20 format=3 uid="uid://c3jn6lbsg0nc6"]
+[gd_scene load_steps=23 format=3 uid="uid://c3jn6lbsg0nc6"]
 
-[ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scenes/main_game.gd" id="1_6j5ir"]
+[ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
 [ext_resource type="Script" uid="uid://l67qxgvrquna" path="res://Scripts/Classes/Monster.gd" id="2_pu3va"]
-[ext_resource type="Script" uid="uid://c6taweseixk1f" path="res://Scenes/main_menu.gd" id="4_6j5ir"]
-[ext_resource type="Script" uid="uid://rv6ekha1xcf4" path="res://Scenes/button_2.gd" id="6_18r40"]
-[ext_resource type="Script" uid="uid://2gmti8plwv28" path="res://Scenes/button.gd" id="6_bb2iq"]
+[ext_resource type="Script" uid="uid://c6taweseixk1f" path="res://Scripts/main_menu.gd" id="4_6j5ir"]
+[ext_resource type="Script" uid="uid://rv6ekha1xcf4" path="res://Scripts/button_2.gd" id="6_18r40"]
+[ext_resource type="Script" uid="uid://2gmti8plwv28" path="res://Scripts/button.gd" id="6_bb2iq"]
+[ext_resource type="Script" uid="uid://d2f32ofsvubpv" path="res://Scripts/main_ui.gd" id="7_18r40"]
+[ext_resource type="Script" uid="uid://354ebn5lvgbw" path="res://Scripts/Classes/WayPoint.gd" id="8_6y7pd"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pu3va"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bb2iq"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+energy_multiplier = 0.0
 
-[sub_resource type="Sky" id="Sky_0e3vx"]
-sky_material = SubResource("ProceduralSkyMaterial_pu3va")
+[sub_resource type="Sky" id="Sky_18r40"]
+sky_material = SubResource("ProceduralSkyMaterial_bb2iq")
 
-[sub_resource type="Environment" id="Environment_6j5ir"]
+[sub_resource type="Environment" id="Environment_6y7pd"]
 background_mode = 2
-sky = SubResource("Sky_0e3vx")
+sky = SubResource("Sky_18r40")
 tonemap_mode = 2
+ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgc0q"]
@@ -46,23 +50,29 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73nn6"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6y7pd"]
+
 [node name="Main Game" type="Node3D"]
 script = ExtResource("1_6j5ir")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6j5ir")
+environment = SubResource("Environment_6y7pd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_energy = 0.165
+light_color = Color(0, 0, 0, 1)
+light_energy = 15.67
+light_indirect_energy = 0.87
 shadow_enabled = true
+sky_mode = 1
 
-[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("Pausemenu") instance=ExtResource("1_l756w")]
+[node name="CharacterBody3D" parent="." node_paths=PackedStringArray("Pausemenu", "otherthingmakenonvisible") instance=ExtResource("1_l756w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2535951, 0, -0.483181)
 Pausemenu = NodePath("../Control")
+otherthingmakenonvisible = NodePath("../Main Ui")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(6.8515787, 0, 0, 0, 1, 0, 0, 0, 4.98413, 0, -1.6640984, 0)
+transform = Transform3D(21.993439, 0, 0, 0, 1, 0, 0, 0, 4.98413, 0, -1.6640984, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_mgc0q")
@@ -71,12 +81,30 @@ mesh = SubResource("BoxMesh_mgc0q")
 shape = SubResource("BoxShape3D_bb2iq")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(6.8515787, 0, 0, 0, -0.08174721, -4.967448, 0, 0.996653, -0.4074387, 0, -1.6640984, -3.3174992)
+transform = Transform3D(6.8515787, 0, 0, 0, -0.013473578, -4.983677, 0, 0.9999091, -0.06715405, 0, -0.31364834, -2.892355)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
 mesh = SubResource("BoxMesh_mgc0q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_bb2iq")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="."]
+transform = Transform3D(6.8515787, 0, 0, 0, -0.013473578, -4.983677, 0, 0.9999091, -0.06715405, 0, -0.31364834, 1.6426768)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D4"]
+mesh = SubResource("BoxMesh_mgc0q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
+shape = SubResource("BoxShape3D_bb2iq")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="."]
+transform = Transform3D(-0.12184808, 0.9997511, -0.06714344, 0, -0.013473578, -4.983677, -6.8504953, -0.017782323, 0.0011942636, -3.7154038, -0.31364834, -0.7659974)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D6"]
+mesh = SubResource("BoxMesh_mgc0q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
 shape = SubResource("BoxShape3D_bb2iq")
 
 [node name="Monster" type="CharacterBody3D" parent="." node_paths=PackedStringArray("thing_to_stalk", "thing_to_stalk2", "thing_to_stalk3")]
@@ -186,7 +214,7 @@ text = "Quit To Main Menu"
 script = ExtResource("6_bb2iq")
 Main_Menu = NodePath("../../Main Menu")
 
-[node name="Button2" type="Button" parent="Control"]
+[node name="Button2" type="Button" parent="Control" node_paths=PackedStringArray("mainui")]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 152.0
@@ -196,6 +224,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_73nn6")
 text = "Resume
 "
 script = ExtResource("6_18r40")
+mainui = NodePath("../../Main Ui")
 
 [node name="Panel" type="Panel" parent="Control"]
 z_index = -1
@@ -205,6 +234,45 @@ offset_top = -27.0
 offset_right = 1151.0
 offset_bottom = 682.0
 mouse_filter = 2
+
+[node name="Main Ui" type="Control" parent="." node_paths=PackedStringArray("character", "quest1", "Nodes")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_18r40")
+character = NodePath("../CharacterBody3D")
+quest1 = NodePath("../Node3D4")
+closeenough = 3
+Nodes = [NodePath("../Node3D4")]
+
+[node name="Label" type="Label" parent="Main Ui"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 121.0
+offset_right = 443.0
+offset_bottom = 241.0
+theme_override_font_sizes/font_size = 22
+text = "Quest: There are no Quests
+"
+
+[node name="Node3D4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.889235, -0.6008241, 0)
+
+[node name="Waypoint" type="MeshInstance3D" parent="Node3D4" node_paths=PackedStringArray("Area")]
+script = ExtResource("8_6y7pd")
+Area = NodePath("Area3D")
+metadata/_custom_type_script = "uid://354ebn5lvgbw"
+
+[node name="Area3D" type="Area3D" parent="Node3D4/Waypoint"]
+transform = Transform3D(3.46135, 0, 0, 0, 3.3344908, 0, 0, 0, 3.6851616, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D4/Waypoint/Area3D"]
+shape = SubResource("BoxShape3D_6y7pd")
+
+[node name="Node3D5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3619418, -0.6008241, 0)
 
 [connection signal="pressed" from="Main Menu/Button" to="Main Menu" method="_on_button_pressed"]
 [connection signal="pressed" from="Main Menu/Button2" to="Main Menu" method="_on_button_2_pressed"]

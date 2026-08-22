@@ -1,6 +1,6 @@
 extends Button
 
-
+@export var mainui : Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -11,5 +11,6 @@ func _process(delta: float) -> void:
 	self.pressed.connect(_onbuttonpress)
 
 func _onbuttonpress():
+	mainui.visible = true
 	self.get_parent().visible = false
 	get_tree().paused = false

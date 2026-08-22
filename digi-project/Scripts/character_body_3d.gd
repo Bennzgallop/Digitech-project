@@ -3,12 +3,20 @@ extends CharacterBody3D
 @onready var head = $Head
 @onready var spotlight = $Head/SpotLight3D
 @export var Pausemenu : Control
+@export var otherthingmakenonvisible : Control
+@export var spotlightenabled = false
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const rotation_speed = 0.01
-
 var is_locked = true
-var spotlightenabled = true
+
+func _ready() -> void:
+	if spotlightenabled == true:
+			print("Spotlight range is 0 changing it")
+			spotlight.spot_range = 4.212
+	else:
+			print("Spotlight range was 4.212 Changing it")
+			spotlight.spot_range = 0
 
 func _physics_process(delta: float) -> void:
 	if is_locked == true:
@@ -20,6 +28,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	if Input.is_action_just_pressed("Esc"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		otherthingmakenonvisible.visible = false
 		get_tree().paused = true
 		Pausemenu.visible = true
 		
@@ -30,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("F"):
 		print("F has been pressed")
 		spotlightenabled = !spotlightenabled
-		if spotlightenabled == false:
+		if spotlightenabled == true:
 			print("Spotlight range is 0 changing it")
 			spotlight.spot_range = 4.212
 		else:
