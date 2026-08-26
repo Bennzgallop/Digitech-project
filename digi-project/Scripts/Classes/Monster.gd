@@ -11,7 +11,8 @@ extends CharacterBody3D
 @export var distance_between_thing_to_stalk : Vector3
 @export var distance_between_thing_to_stalk2 : Vector3
 @export var distance_between_thing_to_stalk3 : Vector3
-
+@export var area : Area3D
+@export var damage : int
 
 var is_stalking = false
 var selfsposition
@@ -49,3 +50,7 @@ func _process(delta: float) -> void:
 		else:
 			push_error("Variable Named 'thingstalking' went to ",maxthingstalking + 1," And Variable named 'is_stalking' Is true Something Went wrong fix it")
 			
+
+func _on_area_entered(thing : Area3D):
+	if thing.health:
+		thing.health -= damage

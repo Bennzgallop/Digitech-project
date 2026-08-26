@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh2ddsilykhn"]
+[gd_scene load_steps=6 format=3 uid="uid://dh2ddsilykhn"]
 
 [ext_resource type="Script" uid="uid://b7xbdxmpf0sa0" path="res://Scripts/character_body_3d.gd" id="1_hr86y"]
+[ext_resource type="Script" uid="uid://dhyug1upopsnd" path="res://Scenes/area_3d.gd" id="2_fn5od"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_fn5od"]
 
@@ -27,6 +28,8 @@ light_energy = 1.577
 spot_range = 0.0
 
 [node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_fn5od")
+health = 100
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_hr86y")
