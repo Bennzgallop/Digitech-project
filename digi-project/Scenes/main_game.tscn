@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3jn6lbsg0nc6"]
+[gd_scene load_steps=24 format=3 uid="uid://c3jn6lbsg0nc6"]
 
 [ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
@@ -31,6 +31,8 @@ glow_enabled = true
 [sub_resource type="BoxMesh" id="BoxMesh_0e3vx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6j5ir"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_73nn6"]
 
 [sub_resource type="GDScript" id="GDScript_6y7pd"]
 script/source = "extends Node3D
@@ -106,7 +108,7 @@ mesh = SubResource("BoxMesh_mgc0q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
 shape = SubResource("BoxShape3D_bb2iq")
 
-[node name="Monster" type="CharacterBody3D" parent="." node_paths=PackedStringArray("thing_to_stalk", "thing_to_stalk2", "thing_to_stalk3")]
+[node name="Monster" type="CharacterBody3D" parent="." node_paths=PackedStringArray("thing_to_stalk", "thing_to_stalk2", "thing_to_stalk3", "area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.192604, 3.7006779, 0)
 script = ExtResource("2_pu3va")
 thing_to_stalk = NodePath("../Node3D")
@@ -117,6 +119,8 @@ time_till_stalk2 = 5.0
 time_till_stalk3 = 10.0
 time_to_reset = 5.0
 distance_between_thing_to_stalk = Vector3(-0.1, 0.01, 10)
+area = NodePath("Area3D")
+damage = 10
 metadata/_custom_type_script = "uid://l67qxgvrquna"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Monster"]
@@ -124,6 +128,12 @@ mesh = SubResource("BoxMesh_0e3vx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Monster"]
 shape = SubResource("BoxShape3D_6j5ir")
+
+[node name="Area3D" type="Area3D" parent="Monster"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Monster/Area3D"]
+transform = Transform3D(2.916, 0, 0, 0, 2.916, 0, 0, 0, 2.916, 0, 0, 0)
+shape = SubResource("BoxShape3D_73nn6")
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.785965, 2.2797444, -0.85974216)

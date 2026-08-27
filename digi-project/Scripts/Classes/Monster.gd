@@ -21,6 +21,7 @@ var maxthingstalking = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	selfsposition = self.position
+	area.connect("area_entered",self._on_area_entered)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,5 +53,7 @@ func _process(delta: float) -> void:
 			
 
 func _on_area_entered(thing : Area3D):
-	if thing.health:
+	print("Thing entered Thing: ",thing)
+	if thing.Health:
 		thing.health -= damage
+		print("Thing: ",thing,"Got damamge: ", damage)
