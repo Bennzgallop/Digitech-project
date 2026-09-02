@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://c3jn6lbsg0nc6"]
+[gd_scene load_steps=26 format=3 uid="uid://c3jn6lbsg0nc6"]
 
 [ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
 [ext_resource type="Script" uid="uid://l67qxgvrquna" path="res://Scripts/Classes/Monster.gd" id="2_pu3va"]
+[ext_resource type="Script" uid="uid://dhyug1upopsnd" path="res://Scenes/area_3d.gd" id="3_73nn6"]
 [ext_resource type="Script" uid="uid://c6taweseixk1f" path="res://Scripts/main_menu.gd" id="4_6j5ir"]
 [ext_resource type="Script" uid="uid://rv6ekha1xcf4" path="res://Scripts/button_2.gd" id="6_18r40"]
 [ext_resource type="Script" uid="uid://2gmti8plwv28" path="res://Scripts/button.gd" id="6_bb2iq"]
@@ -23,6 +24,8 @@ background_mode = 2
 sky = SubResource("Sky_73nn6")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0mdn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgc0q"]
 
@@ -71,6 +74,13 @@ sky_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2535951, 0, -0.483181)
 Pausemenu = NodePath("../Control")
 otherthingmakenonvisible = NodePath("../Main Ui")
+
+[node name="Area3D2" type="Area3D" parent="CharacterBody3D"]
+script = ExtResource("3_73nn6")
+Health = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D2"]
+shape = SubResource("CapsuleShape3D_r0mdn")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(21.993439, 0, 0, 0, 1, 0, 0, 0, 4.98413, 0, -1.6640984, 0)
@@ -132,7 +142,7 @@ shape = SubResource("BoxShape3D_6j5ir")
 [node name="Area3D" type="Area3D" parent="Monster"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Monster/Area3D"]
-transform = Transform3D(2.916, 0, 0, 0, 2.916, 0, 0, 0, 2.916, 0, 0, 0)
+transform = Transform3D(5.65, 0, 0, 0, 5.65, 0, 0, 0, 5.65, 0, 0, 0)
 shape = SubResource("BoxShape3D_73nn6")
 
 [node name="Node3D" type="Node3D" parent="."]

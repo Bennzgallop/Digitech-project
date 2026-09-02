@@ -20,7 +20,7 @@ var thingstalking = 3
 var maxthingstalking = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	selfsposition = self.position
+	selfsposition = self.position 
 	area.connect("area_entered",self._on_area_entered)
 
 
@@ -55,5 +55,7 @@ func _process(delta: float) -> void:
 func _on_area_entered(thing : Area3D):
 	print("Thing entered Thing: ",thing)
 	if thing.Health:
-		thing.health -= damage
+		thing.Health -= damage
 		print("Thing: ",thing,"Got damamge: ", damage)
+	else:
+		print("Does not have Health")
