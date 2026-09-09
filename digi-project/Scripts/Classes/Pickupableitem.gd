@@ -31,12 +31,14 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(thing : Area3D):
 	if thing.get_parent() is CharacterBody3D:
-		if thing.holdingslot:
-			thinginside = true
-			holdingslot = thing.holdingslot
+		if thing.name == "Player":
+			if thing.holdingslot:
+				thinginside = true
+				holdingslot = thing.holdingslot
 
 
 func _on_area_exited(thing : Area3D):
 	if thing.get_parent() is CharacterBody3D:
-		if thing.holdingslot:
-			thinginside = false
+		if thing.name == "Player":
+			if thing.holdingslot:
+				thinginside = false

@@ -9,7 +9,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hr86y"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_hr86y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -30,6 +30,7 @@ spot_range = 0.0
 [node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("holdingslot")]
 script = ExtResource("2_fn5od")
 holdingslot = NodePath("../HoldingSlot")
+Health = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_hr86y")

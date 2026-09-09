@@ -53,9 +53,10 @@ func _process(delta: float) -> void:
 			
 
 func _on_area_entered(thing : Area3D):
-	print("Thing entered Thing: ",thing)
-	if thing.Health:
-		thing.Health -= damage
-		print("Thing: ",thing,"Got damamge: ", damage)
+	print("Thing entered Thing: ",thing.name)
+	if thing.get_parent() is CharacterBody3D:
+		if thing.Health:
+			thing.Health -= damage
+			print("Thing: ",thing.name,"Got damamged: ", damage," Health now: ",thing.Health)
 	else:
 		print("Does not have Health")
