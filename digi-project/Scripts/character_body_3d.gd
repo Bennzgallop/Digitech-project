@@ -7,7 +7,7 @@ extends CharacterBody3D
 @export var spotlightenabled = false
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const rotation_speed = 0.01
+var rotation_speed = 0.01
 var is_locked = true
 
 func _ready() -> void:
@@ -19,6 +19,7 @@ func _ready() -> void:
 			spotlight.spot_range = 0
 
 func _physics_process(delta: float) -> void:
+	print("Rotation speed: ",rotation_speed)
 	if is_locked == true:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif is_locked == false:

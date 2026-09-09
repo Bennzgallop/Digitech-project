@@ -1,13 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3jn6lbsg0nc6"]
+[gd_scene load_steps=30 format=3 uid="uid://c3jn6lbsg0nc6"]
 
 [ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
 [ext_resource type="Script" uid="uid://l67qxgvrquna" path="res://Scripts/Classes/Monster.gd" id="2_pu3va"]
 [ext_resource type="Script" uid="uid://c6taweseixk1f" path="res://Scripts/main_menu.gd" id="4_6j5ir"]
+[ext_resource type="Script" uid="uid://dwn4gwo3wsw7u" path="res://Scenes/button.gd" id="5_0xqxu"]
 [ext_resource type="Script" uid="uid://rv6ekha1xcf4" path="res://Scripts/button_2.gd" id="6_18r40"]
 [ext_resource type="Script" uid="uid://2gmti8plwv28" path="res://Scripts/button.gd" id="6_bb2iq"]
 [ext_resource type="Script" uid="uid://d2f32ofsvubpv" path="res://Scripts/main_ui.gd" id="7_18r40"]
 [ext_resource type="Script" uid="uid://354ebn5lvgbw" path="res://Scripts/Classes/WayPoint.gd" id="8_6y7pd"]
+[ext_resource type="Script" uid="uid://c7nu3tb6eq4" path="res://Scenes/mouse_sensitivty.gd" id="8_tpqse"]
+[ext_resource type="Script" uid="uid://dbfjudva0f40b" path="res://Scripts/Classes/Pickupableitem.gd" id="9_73nn6"]
+[ext_resource type="Script" uid="uid://c3ja2buo624dn" path="res://Scenes/mouse_sensitivtyl_warning.gd" id="10_r0mdn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bb2iq"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -52,6 +56,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6y7pd"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_r0mdn"]
+size = Vector3(1, 1.5007324, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_73nn6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tpqse"]
+
 [node name="Main Game" type="Node3D"]
 script = ExtResource("1_6j5ir")
 
@@ -68,7 +79,7 @@ sky_mode = 1
 
 [node name="CharacterBody3D" parent="." node_paths=PackedStringArray("Pausemenu", "otherthingmakenonvisible") instance=ExtResource("1_l756w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2535951, 0, -0.483181)
-Pausemenu = NodePath("../Control")
+Pausemenu = NodePath("../Pause Menu")
 otherthingmakenonvisible = NodePath("../Main Ui")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -96,15 +107,6 @@ transform = Transform3D(6.8515787, 0, 0, 0, -0.013473578, -4.983677, 0, 0.999909
 mesh = SubResource("BoxMesh_mgc0q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D4"]
-shape = SubResource("BoxShape3D_bb2iq")
-
-[node name="StaticBody3D6" type="StaticBody3D" parent="."]
-transform = Transform3D(-0.12184808, 0.9997511, -0.06714344, 0, -0.013473578, -4.983677, -6.8504953, -0.017782323, 0.0011942636, -3.7154038, -0.31364834, -0.7659974)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D6"]
-mesh = SubResource("BoxMesh_mgc0q")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D6"]
 shape = SubResource("BoxShape3D_bb2iq")
 
 [node name="Monster" type="CharacterBody3D" parent="." node_paths=PackedStringArray("thing_to_stalk", "thing_to_stalk2", "thing_to_stalk3")]
@@ -194,7 +196,7 @@ mouse_filter = 2
 theme = SubResource("Theme_6j5ir")
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgc0q")
 
-[node name="Control" type="Control" parent="."]
+[node name="Pause Menu" type="Control" parent="."]
 process_mode = 2
 visible = false
 layout_mode = 3
@@ -202,7 +204,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button" type="Button" parent="Control" node_paths=PackedStringArray("Main_Menu")]
+[node name="Button" type="Button" parent="Pause Menu" node_paths=PackedStringArray("mainmenu")]
 z_index = 1
 layout_mode = 0
 offset_left = -1.0
@@ -211,10 +213,23 @@ offset_right = 147.0
 offset_bottom = 437.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_6j5ir")
 text = "Quit To Main Menu"
-script = ExtResource("6_bb2iq")
-Main_Menu = NodePath("../../Main Menu")
+script = ExtResource("5_0xqxu")
+mainmenu = NodePath("../../Main Menu")
 
-[node name="Button2" type="Button" parent="Control" node_paths=PackedStringArray("mainui")]
+[node name="Button3" type="Button" parent="Pause Menu" node_paths=PackedStringArray("Settings")]
+z_index = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = 253.0
+offset_right = 146.0
+offset_bottom = 330.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_6j5ir")
+text = "Settings
+"
+script = ExtResource("6_bb2iq")
+Settings = NodePath("../Settings")
+
+[node name="Button2" type="Button" parent="Pause Menu" node_paths=PackedStringArray("mainui")]
 layout_mode = 0
 offset_left = 1.0
 offset_top = 152.0
@@ -226,7 +241,7 @@ text = "Resume
 script = ExtResource("6_18r40")
 mainui = NodePath("../../Main Ui")
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="Pause Menu"]
 z_index = -1
 layout_mode = 0
 offset_left = -4.0
@@ -234,6 +249,45 @@ offset_top = -27.0
 offset_right = 1151.0
 offset_bottom = 682.0
 mouse_filter = 2
+
+[node name="Settings" type="Control" parent="Pause Menu"]
+process_mode = 2
+visible = false
+anchors_preset = 0
+offset_left = 964.0
+offset_top = 247.0
+offset_right = 1004.0
+offset_bottom = 287.0
+
+[node name="Mouse Sensitivty" type="LineEdit" parent="Pause Menu/Settings" node_paths=PackedStringArray("player")]
+layout_mode = 0
+offset_left = -174.99998
+offset_top = -1.9999998
+offset_right = -106.437485
+offset_bottom = 29.0
+scale = Vector2(0.950448, 0.9117072)
+text = "0.01"
+script = ExtResource("8_tpqse")
+player = NodePath("../../../CharacterBody3D")
+
+[node name="Mouse Sensitivty label" type="Label" parent="Pause Menu/Settings"]
+layout_mode = 0
+offset_left = -320.0
+offset_right = -185.0
+offset_bottom = 23.0
+text = "Mouse Sensitivity"
+
+[node name="Mouse Sensitivtyl warning" type="Label" parent="Pause Menu/Settings" node_paths=PackedStringArray("mousesensiticyty")]
+visible = false
+layout_mode = 0
+offset_left = -104.0
+offset_top = 2.0
+offset_right = 43.0
+offset_bottom = 25.0
+theme_override_colors/font_color = Color(0.9398806, 0.2379708, 0.21457627, 1)
+text = "* Do not Recomend"
+script = ExtResource("10_r0mdn")
+mousesensiticyty = NodePath("../Mouse Sensitivty")
 
 [node name="Main Ui" type="Control" parent="." node_paths=PackedStringArray("character", "quest1", "Nodes")]
 visible = false
@@ -274,6 +328,36 @@ shape = SubResource("BoxShape3D_6y7pd")
 [node name="Node3D5" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3619418, -0.6008241, 0)
 
+[node name="pickupableitem" type="Node3D" parent="." node_paths=PackedStringArray("area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9061074, 0, 0)
+script = ExtResource("9_73nn6")
+area = NodePath("Area3D")
+metadata/_custom_type_script = "uid://dbfjudva0f40b"
+
+[node name="Area3D" type="Area3D" parent="pickupableitem"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickupableitem/Area3D"]
+transform = Transform3D(6.1386166, 0, 0, 0, 2.4508395, 0, 0, 0, 5.2707396, 0, -0.6136074, 0)
+shape = SubResource("BoxShape3D_r0mdn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickupableitem"]
+mesh = SubResource("BoxMesh_73nn6")
+
+[node name="pickupableitem2" type="Node3D" parent="." node_paths=PackedStringArray("area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0167155, 0, 0)
+script = ExtResource("9_73nn6")
+area = NodePath("Area3D")
+metadata/_custom_type_script = "uid://dbfjudva0f40b"
+
+[node name="Area3D" type="Area3D" parent="pickupableitem2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickupableitem2/Area3D"]
+transform = Transform3D(6.1386166, 0, 0, 0, 2.4508395, 0, 0, 0, 5.2707396, 0, -0.6136074, 0)
+shape = SubResource("BoxShape3D_r0mdn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pickupableitem2"]
+mesh = SubResource("SphereMesh_tpqse")
+
 [connection signal="pressed" from="Main Menu/Button" to="Main Menu" method="_on_button_pressed"]
 [connection signal="pressed" from="Main Menu/Button2" to="Main Menu" method="_on_button_2_pressed"]
-[connection signal="pressed" from="Control/Button" to="Control" method="_on_button_pressed"]
+[connection signal="pressed" from="Pause Menu/Button" to="Pause Menu" method="_on_button_pressed"]

@@ -1,20 +1,11 @@
-extends Button
+extends LineEdit
 
-@export var Settings : Control
-var open = false
+@export var player : CharacterBody3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.pressed.connect(_onbuttonpress)
-
-
-func _onbuttonpress():
-	if open == false:
-		Settings.visible = true
-		open = true
-	else:
-		Settings.visible = false
-		open = false
+	player.rotation_speed = self.text.to_float()

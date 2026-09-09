@@ -7,20 +7,20 @@ extends MeshInstance3D
 func _ready() -> void:
 	var mesh = MeshInstance3D.new()
 	add_child(mesh)
-
+	
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.3
 	sphere.height = 0.6
 	mesh.mesh = sphere
 	var material = ShaderMaterial.new()
 	var shader = Shader.new()
-
+	
 	shader.code = """
 	shader_type spatial;
 	render_mode unshaded, depth_test_disabled, depth_draw_never;
-
+	
 	uniform vec4 marker_color : source_color;
-
+	
 	void fragment() {
 		ALBEDO = marker_color.rgb;
 		ALPHA = marker_color.a;
@@ -28,7 +28,7 @@ func _ready() -> void:
 	"""
 	material.shader = shader
 	material.set_shader_parameter("marker_color", color)
-
+	
 	mesh.material_override = material
 	
 	Area.connect("area_entered",self._on_area_entered)

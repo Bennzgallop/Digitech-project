@@ -1,20 +1,20 @@
-extends Button
+extends HScrollBar
 
-@export var Settings : Control
-var open = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.pressed.connect(_onbuttonpress)
+	pass
 
 
-func _onbuttonpress():
-	if open == false:
-		Settings.visible = true
-		open = true
-	else:
-		Settings.visible = false
-		open = false
+
+func _on_scrolling() -> void:
+	print("Sc")
+
+
+func _on_value_changed(value: float) -> void:
+	print("Value changed value: ",value)
