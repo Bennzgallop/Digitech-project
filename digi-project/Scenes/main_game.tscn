@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c3jn6lbsg0nc6"]
+[gd_scene load_steps=33 format=3 uid="uid://c3jn6lbsg0nc6"]
 
 [ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
@@ -12,18 +12,19 @@
 [ext_resource type="Script" uid="uid://c7nu3tb6eq4" path="res://Scenes/mouse_sensitivty.gd" id="8_tpqse"]
 [ext_resource type="Script" uid="uid://dbfjudva0f40b" path="res://Scripts/Classes/Pickupableitem.gd" id="9_73nn6"]
 [ext_resource type="Script" uid="uid://c3ja2buo624dn" path="res://Scenes/mouse_sensitivtyl_warning.gd" id="10_r0mdn"]
+[ext_resource type="Script" uid="uid://cdlj4f4hm1odj" path="res://Scenes/heart_moniter.gd" id="11_c78sm"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bb2iq"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c78sm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-energy_multiplier = 0.0
+energy_multiplier = 2.7
 
-[sub_resource type="Sky" id="Sky_18r40"]
-sky_material = SubResource("ProceduralSkyMaterial_bb2iq")
+[sub_resource type="Sky" id="Sky_i47ox"]
+sky_material = SubResource("ProceduralSkyMaterial_c78sm")
 
-[sub_resource type="Environment" id="Environment_6y7pd"]
+[sub_resource type="Environment" id="Environment_sftma"]
 background_mode = 2
-sky = SubResource("Sky_18r40")
+sky = SubResource("Sky_i47ox")
 tonemap_mode = 2
 ssao_enabled = true
 glow_enabled = true
@@ -56,6 +57,9 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73nn6"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c78sm"]
+bg_color = Color(0.7569089, 0, 0.12138938, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_6y7pd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0mdn"]
@@ -69,7 +73,7 @@ size = Vector3(1, 1.5007324, 1)
 script = ExtResource("1_6j5ir")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6y7pd")
+environment = SubResource("Environment_sftma")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -123,7 +127,7 @@ time_till_stalk3 = 10.0
 time_to_reset = 5.0
 distance_between_thing_to_stalk = Vector3(-0.1, 0.01, 10)
 area = NodePath("Area3D")
-damage = 1
+damage = 25
 metadata/_custom_type_script = "uid://l67qxgvrquna"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Monster"]
@@ -150,6 +154,7 @@ script = SubResource("GDScript_6y7pd")
 
 [node name="Main Menu" type="Control" parent="."]
 process_mode = 2
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -300,7 +305,6 @@ script = ExtResource("10_r0mdn")
 mousesensiticyty = NodePath("../Mouse Sensitivty")
 
 [node name="Main Ui" type="Control" parent="." node_paths=PackedStringArray("character", "quest1", "Nodes")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -320,6 +324,484 @@ offset_bottom = 241.0
 theme_override_font_sizes/font_size = 22
 text = "Quest: There are no Quests
 "
+
+[node name="Heart moniter" type="Control" parent="Main Ui"]
+anchors_preset = 0
+offset_left = 25.0
+offset_top = 492.0
+offset_right = 65.0
+offset_bottom = 532.0
+scale = Vector2(3.0599148, 3.1233027)
+script = ExtResource("11_c78sm")
+
+[node name="Regular" type="Control" parent="Main Ui/Heart moniter"]
+visible = false
+anchors_preset = 0
+offset_left = 62.00001
+offset_top = 25.0
+offset_right = 62.10001
+offset_bottom = 25.1
+scale = Vector2(-0.49255118, 0.9507002)
+
+[node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = -38.674667
+offset_top = -16.8297
+offset_right = 1.3253326
+offset_bottom = 23.1703
+
+[node name="Panel" type="Panel" parent="Main Ui/Heart moniter/Regular/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 15.777869
+offset_right = 78.57466
+offset_bottom = 55.77787
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular/Control"]
+layout_mode = 0
+offset_left = -44.665413
+offset_top = 15.777832
+offset_right = -4.665413
+offset_bottom = 55.777832
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 16.829689
+offset_right = 78.57468
+offset_bottom = 56.82969
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular/Control"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = -121.91474
+offset_top = -15.777843
+offset_right = -81.91474
+offset_bottom = 24.222157
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular/Control2"]
+layout_mode = 0
+offset_left = -42.63517
+offset_top = 14.725976
+offset_right = -2.63517
+offset_bottom = 54.725975
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular/Control2"]
+layout_mode = 0
+offset_left = 38.57467
+offset_top = 15.777832
+offset_right = 78.57468
+offset_bottom = 55.777832
+rotation = -2.6032255
+scale = Vector2(0.62073135, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular/Control2"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.5333185, 0.025821773)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = -164.54993
+offset_right = -164.44992
+offset_bottom = 0.099975586
+
+[node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = 44.565414
+offset_right = 44.66542
+offset_bottom = 0.09997749
+
+[node name="Point when thing is at load" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = 44.565414
+offset_top = 1.1444092e-05
+offset_right = 44.66542
+offset_bottom = 0.09998703
+
+[node name="Control3" type="Control" parent="Main Ui/Heart moniter/Regular"]
+anchors_preset = 0
+offset_left = -117.75426
+offset_top = -16.8297
+offset_right = -77.75426
+offset_bottom = 23.1703
+
+[node name="Regular2" type="Control" parent="Main Ui/Heart moniter"]
+visible = false
+anchors_preset = 0
+offset_left = 142.81442
+offset_top = 24.33321
+offset_right = 142.91443
+offset_bottom = 24.433186
+scale = Vector2(-0.49255118, 0.9507002)
+
+[node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular2"]
+anchors_preset = 0
+offset_left = -38.88576
+offset_top = -16.165293
+offset_right = 1.1142387
+offset_bottom = 23.834707
+
+[node name="Panel" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 15.777869
+offset_right = 78.57466
+offset_bottom = 55.77787
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control"]
+layout_mode = 0
+offset_left = -44.665413
+offset_top = 15.777832
+offset_right = -4.665413
+offset_bottom = 55.777832
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 16.829689
+offset_right = 78.57468
+offset_bottom = 56.82969
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular2"]
+anchors_preset = 0
+offset_left = -122.12583
+offset_top = -15.113436
+offset_right = -82.12583
+offset_bottom = 24.886564
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control2"]
+layout_mode = 0
+offset_left = -42.63517
+offset_top = 14.725976
+offset_right = -2.63517
+offset_bottom = 54.725975
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control2"]
+layout_mode = 0
+offset_left = 38.57467
+offset_top = 15.777832
+offset_right = 78.57468
+offset_bottom = 55.777832
+rotation = -2.6032255
+scale = Vector2(0.62073135, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular2/Control2"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.5333185, 0.025821773)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular2"]
+anchors_preset = 0
+offset_left = -164.761
+offset_top = 0.6644082
+offset_right = -164.661
+offset_bottom = 0.7644086
+
+[node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular2"]
+anchors_preset = 0
+offset_left = 44.35432
+offset_top = 0.6644101
+offset_right = 44.454327
+offset_bottom = 0.7644105
+
+[node name="Point when thing is at load" type="Control" parent="Main Ui/Heart moniter/Regular2"]
+anchors_preset = 0
+offset_left = 44.35432
+offset_top = 0.66441965
+offset_right = 44.45432
+offset_bottom = 0.76442003
+
+[node name="Regular3" type="Control" parent="Main Ui/Heart moniter"]
+anchors_preset = 0
+offset_left = 62.00001
+offset_top = 25.0
+offset_right = 62.10001
+offset_bottom = 25.1
+scale = Vector2(-0.49255118, 0.9507002)
+
+[node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = -38.674667
+offset_top = -16.8297
+offset_right = 1.3253326
+offset_bottom = 23.1703
+
+[node name="Panel" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 15.777869
+offset_right = 78.57466
+offset_bottom = 55.77787
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 16.829689
+offset_right = 78.57468
+offset_bottom = 56.82969
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 16.829689
+offset_right = 78.57468
+offset_bottom = 56.82969
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel5" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = -121.91474
+offset_top = -15.777843
+offset_right = -81.91474
+offset_bottom = 24.222157
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control2"]
+layout_mode = 0
+offset_left = -42.63517
+offset_top = 14.725976
+offset_right = -2.63517
+offset_bottom = 54.725975
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control2"]
+layout_mode = 0
+offset_left = 38.57467
+offset_top = 15.777832
+offset_right = 78.57468
+offset_bottom = 55.777832
+rotation = -2.6032255
+scale = Vector2(0.62073135, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control2"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.5333185, 0.025821773)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = -164.54993
+offset_right = -164.44992
+offset_bottom = 0.099975586
+
+[node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = 44.565414
+offset_right = 44.66542
+offset_bottom = 0.09997749
+
+[node name="Point when thing is at load" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = 44.565414
+offset_top = 1.1444092e-05
+offset_right = 44.66542
+offset_bottom = 0.09998703
+
+[node name="Control3" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+anchors_preset = 0
+offset_left = -117.75426
+offset_top = -16.8297
+offset_right = -77.75426
+offset_bottom = 23.1703
+
+[node name="Regular4" type="Control" parent="Main Ui/Heart moniter"]
+anchors_preset = 0
+offset_left = 142.81442
+offset_top = 24.33321
+offset_right = 142.91443
+offset_bottom = 24.433186
+scale = Vector2(-0.49255118, 0.9507002)
+
+[node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular4"]
+anchors_preset = 0
+offset_left = -38.88576
+offset_top = -16.165293
+offset_right = 1.1142387
+offset_bottom = 23.834707
+
+[node name="Panel" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 15.777869
+offset_right = 78.57466
+offset_bottom = 55.77787
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = -44.665413
+offset_top = 15.777832
+offset_right = -4.665413
+offset_bottom = 55.777832
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = 38.574673
+offset_top = 16.829689
+offset_right = 78.57468
+offset_bottom = 56.82969
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular4"]
+anchors_preset = 0
+offset_left = -122.12583
+offset_top = -15.113436
+offset_right = -82.12583
+offset_bottom = 24.886564
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control2"]
+layout_mode = 0
+offset_left = -42.63517
+offset_top = 14.725976
+offset_right = -2.63517
+offset_bottom = 54.725975
+scale = Vector2(1.1285843, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel2" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control2"]
+layout_mode = 0
+offset_left = 38.57467
+offset_top = 15.777832
+offset_right = 78.57468
+offset_bottom = 55.777832
+rotation = -2.6032255
+scale = Vector2(0.62073135, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel3" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control2"]
+layout_mode = 0
+offset_left = 18.27221
+offset_top = 3.1555786
+offset_right = 58.272213
+offset_bottom = 43.15558
+rotation = -3.771257
+scale = Vector2(0.5333185, 0.025821773)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular4"]
+anchors_preset = 0
+offset_left = -164.761
+offset_top = 0.6644082
+offset_right = -164.661
+offset_bottom = 0.7644086
+
+[node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular4"]
+anchors_preset = 0
+offset_left = 44.35432
+offset_top = 0.6644101
+offset_right = 44.454327
+offset_bottom = 0.7644105
+
+[node name="Point when thing is at load" type="Control" parent="Main Ui/Heart moniter/Regular4"]
+anchors_preset = 0
+offset_left = 44.35432
+offset_top = 0.66441965
+offset_right = 44.45432
+offset_bottom = 0.76442003
+
+[node name="Endpoint" type="Control" parent="Main Ui/Heart moniter"]
+anchors_preset = 0
+offset_top = 26.0
+offset_right = 0.1
+offset_bottom = 26.099998
 
 [node name="Node3D4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.889235, -0.6008241, 0)

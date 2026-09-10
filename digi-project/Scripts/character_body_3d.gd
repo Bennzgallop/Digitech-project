@@ -2,9 +2,11 @@ extends CharacterBody3D
 
 @onready var head = $Head
 @onready var spotlight = $Head/SpotLight3D
+@onready var area = $Area3D
 @export var Pausemenu : Control
 @export var otherthingmakenonvisible : Control
 @export var spotlightenabled = false
+@export var health : int
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var rotation_speed = 0.01
@@ -20,6 +22,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	print("Rotation speed: ",rotation_speed)
+	health = area.Health
+	print("Area health: ",area.Health)
 	if is_locked == true:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	elif is_locked == false:

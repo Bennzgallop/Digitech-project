@@ -23,6 +23,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	self.visible = true
+	
 	if whichquest == 1:
 		questlabel.text = "Quest: " + quests[whichquest - 1]
 		if character.spotlightenabled:

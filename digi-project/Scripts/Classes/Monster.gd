@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 			is_stalking = false
 		else:
 			push_error("Variable Named 'thingstalking' went to ",maxthingstalking + 1," And Variable named 'is_stalking' Is true Something Went wrong fix it")
-			
+
 
 func _on_area_entered(thing : Area3D):
 	print("Thing entered Thing: ",thing.name)
