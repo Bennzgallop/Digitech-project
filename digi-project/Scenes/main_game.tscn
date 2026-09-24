@@ -17,7 +17,7 @@
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c78sm"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-energy_multiplier = 2.7
+energy_multiplier = 0.0
 
 [sub_resource type="Sky" id="Sky_i47ox"]
 sky_material = SubResource("ProceduralSkyMaterial_c78sm")
@@ -26,7 +26,6 @@ sky_material = SubResource("ProceduralSkyMaterial_c78sm")
 background_mode = 2
 sky = SubResource("Sky_i47ox")
 tonemap_mode = 2
-ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_mgc0q"]
@@ -154,7 +153,6 @@ script = SubResource("GDScript_6y7pd")
 
 [node name="Main Menu" type="Control" parent="."]
 process_mode = 2
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -305,6 +303,7 @@ script = ExtResource("10_r0mdn")
 mousesensiticyty = NodePath("../Mouse Sensitivty")
 
 [node name="Main Ui" type="Control" parent="." node_paths=PackedStringArray("character", "quest1", "Nodes")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -326,21 +325,28 @@ text = "Quest: There are no Quests
 "
 
 [node name="Heart moniter" type="Control" parent="Main Ui"]
+clip_contents = true
+custom_minimum_size = Vector2(5, 5)
 anchors_preset = 0
-offset_left = 25.0
-offset_top = 492.0
-offset_right = 65.0
-offset_bottom = 532.0
-scale = Vector2(3.0599148, 3.1233027)
+offset_left = 76.0
+offset_top = 530.0
+offset_right = 93.17986
+offset_bottom = 546.41565
+scale = Vector2(3.8999147, 4.203303)
 script = ExtResource("11_c78sm")
 
-[node name="Regular" type="Control" parent="Main Ui/Heart moniter"]
-visible = false
+[node name="Endpoint" type="Control" parent="Main Ui/Heart moniter"]
 anchors_preset = 0
-offset_left = 62.00001
-offset_top = 25.0
-offset_right = 62.10001
-offset_bottom = 25.1
+offset_top = 26.0
+offset_right = 0.1
+offset_bottom = 26.099998
+
+[node name="Regular" type="Control" parent="Main Ui/Heart moniter"]
+anchors_preset = 0
+offset_left = 44.15278
+offset_top = 14.9882145
+offset_right = 44.25277
+offset_bottom = 15.08819
 scale = Vector2(-0.49255118, 0.9507002)
 
 [node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular"]
@@ -451,12 +457,11 @@ offset_right = -77.75426
 offset_bottom = 23.1703
 
 [node name="Regular2" type="Control" parent="Main Ui/Heart moniter"]
-visible = false
 anchors_preset = 0
-offset_left = 142.81442
-offset_top = 24.33321
-offset_right = 142.91443
-offset_bottom = 24.433186
+offset_left = 124.96676
+offset_top = 14.9882145
+offset_right = 125.066734
+offset_bottom = 15.08819
 scale = Vector2(-0.49255118, 0.9507002)
 
 [node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular2"]
@@ -562,11 +567,12 @@ offset_right = 44.45432
 offset_bottom = 0.76442003
 
 [node name="Regular3" type="Control" parent="Main Ui/Heart moniter"]
+visible = false
 anchors_preset = 0
-offset_left = 62.00001
-offset_top = 25.0
-offset_right = 62.10001
-offset_bottom = 25.1
+offset_left = 44.15278
+offset_top = 14.750307
+offset_right = 44.25277
+offset_bottom = 14.850283
 scale = Vector2(-0.49255118, 0.9507002)
 
 [node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular3"]
@@ -605,6 +611,46 @@ rotation = -3.771257
 scale = Vector2(0.59275, 0.025448823)
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
+[node name="Panel6" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = -1.1820183
+offset_top = 17.154112
+offset_right = 38.817986
+offset_bottom = 57.154114
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel7" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = -21.484482
+offset_top = 3.480002
+offset_right = 18.515522
+offset_bottom = 43.480003
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel8" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = -41.65537
+offset_top = 16.817335
+offset_right = -1.655365
+offset_bottom = 56.817337
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel9" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
+layout_mode = 0
+offset_left = -61.957832
+offset_top = 3.143225
+offset_right = -21.957829
+offset_bottom = 43.143227
+rotation = -3.771257
+scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
 [node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
 layout_mode = 0
 offset_left = 38.574673
@@ -626,6 +672,7 @@ scale = Vector2(0.59275, 0.025448823)
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular3"]
+visible = false
 anchors_preset = 0
 offset_left = -121.91474
 offset_top = -15.777843
@@ -688,11 +735,12 @@ offset_right = -77.75426
 offset_bottom = 23.1703
 
 [node name="Regular4" type="Control" parent="Main Ui/Heart moniter"]
+visible = false
 anchors_preset = 0
-offset_left = 142.81442
-offset_top = 24.33321
-offset_right = 142.91443
-offset_bottom = 24.433186
+offset_left = 124.96676
+offset_top = 14.750307
+offset_right = 125.066734
+offset_bottom = 14.850283
 scale = Vector2(-0.49255118, 0.9507002)
 
 [node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular4"]
@@ -708,15 +756,6 @@ offset_left = 38.574673
 offset_top = 15.777869
 offset_right = 78.57466
 offset_bottom = 55.77787
-scale = Vector2(1.1285843, 0.025448823)
-theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
-
-[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
-layout_mode = 0
-offset_left = -44.665413
-offset_top = 15.777832
-offset_right = -4.665413
-offset_bottom = 55.777832
 scale = Vector2(1.1285843, 0.025448823)
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
@@ -738,6 +777,26 @@ offset_right = 58.272213
 offset_bottom = 43.15558
 rotation = -3.771257
 scale = Vector2(0.59275, 0.025448823)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = -2.108654
+offset_top = 16.517515
+offset_right = 37.891354
+offset_bottom = 56.51751
+rotation = -2.6032255
+scale = Vector2(0.64603, 0.025406666)
+theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
+
+[node name="Panel5" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
+layout_mode = 0
+offset_left = -22.411118
+offset_top = 2.8434057
+offset_right = 17.588882
+offset_bottom = 42.843407
+rotation = -3.6951172
+scale = Vector2(0.66012675, 0.025448823)
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular4"]
@@ -796,12 +855,6 @@ offset_left = 44.35432
 offset_top = 0.66441965
 offset_right = 44.45432
 offset_bottom = 0.76442003
-
-[node name="Endpoint" type="Control" parent="Main Ui/Heart moniter"]
-anchors_preset = 0
-offset_top = 26.0
-offset_right = 0.1
-offset_bottom = 26.099998
 
 [node name="Node3D4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.889235, -0.6008241, 0)
