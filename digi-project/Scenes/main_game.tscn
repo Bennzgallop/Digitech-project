@@ -1,10 +1,15 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=34 format=3 uid="uid://c3jn6lbsg0nc6"]
+=======
+[gd_scene load_steps=37 format=3 uid="uid://c3jn6lbsg0nc6"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" uid="uid://p2ebnpyvuj75" path="res://Scripts/main_game.gd" id="1_6j5ir"]
 [ext_resource type="PackedScene" uid="uid://dh2ddsilykhn" path="res://Scenes/character_body_3d.tscn" id="1_l756w"]
 [ext_resource type="Texture2D" uid="uid://bk5olmawhwjgp" path="res://Assets/Protype sky.png" id="2_i47ox"]
 [ext_resource type="Script" uid="uid://l67qxgvrquna" path="res://Scripts/Classes/Monster.gd" id="2_pu3va"]
 [ext_resource type="Script" uid="uid://c6taweseixk1f" path="res://Scripts/main_menu.gd" id="4_6j5ir"]
+[ext_resource type="Shader" uid="uid://dwgutifvidkgw" path="res://Shaders/new_shader.gdshader" id="4_i47ox"]
 [ext_resource type="Script" uid="uid://dwn4gwo3wsw7u" path="res://Scenes/button.gd" id="5_0xqxu"]
 [ext_resource type="Script" uid="uid://rv6ekha1xcf4" path="res://Scripts/button_2.gd" id="6_18r40"]
 [ext_resource type="Script" uid="uid://2gmti8plwv28" path="res://Scripts/button.gd" id="6_bb2iq"]
@@ -14,8 +19,10 @@
 [ext_resource type="Script" uid="uid://dbfjudva0f40b" path="res://Scripts/Classes/Pickupableitem.gd" id="9_73nn6"]
 [ext_resource type="Script" uid="uid://c3ja2buo624dn" path="res://Scenes/mouse_sensitivtyl_warning.gd" id="10_r0mdn"]
 [ext_resource type="Script" uid="uid://cdlj4f4hm1odj" path="res://Scenes/heart_moniter.gd" id="11_c78sm"]
+[ext_resource type="Shader" uid="uid://cs1rmkuwkc3qq" path="res://Scenes/main_game.gdshader" id="13_sftma"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sftma"]
+<<<<<<< Updated upstream
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0.09703625, 0.012759543, 0.13083988, 1)
 sky_curve = 7.5320015
@@ -23,6 +30,11 @@ sky_energy_multiplier = 0.77
 sky_cover = ExtResource("2_i47ox")
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
+=======
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+energy_multiplier = 0.0
+>>>>>>> Stashed changes
 
 [sub_resource type="Sky" id="Sky_erobn"]
 sky_material = SubResource("ProceduralSkyMaterial_sftma")
@@ -30,8 +42,11 @@ sky_material = SubResource("ProceduralSkyMaterial_sftma")
 [sub_resource type="Environment" id="Environment_vc13p"]
 background_mode = 2
 sky = SubResource("Sky_erobn")
+<<<<<<< Updated upstream
 ambient_light_source = 3
 ambient_light_color = Color(0.32643238, 0.18090221, 0.4518941, 1)
+=======
+>>>>>>> Stashed changes
 tonemap_mode = 2
 tonemap_exposure = 1.46
 tonemap_white = 2.24
@@ -41,7 +56,12 @@ glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb2iq"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sftma"]
+render_priority = 0
+shader = ExtResource("4_i47ox")
+
 [sub_resource type="BoxMesh" id="BoxMesh_0e3vx"]
+material = SubResource("ShaderMaterial_sftma")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6j5ir"]
 
@@ -67,6 +87,9 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c78sm"]
 bg_color = Color(0.7569089, 0, 0.12138938, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_erobn"]
+shader = ExtResource("13_sftma")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6y7pd"]
 
@@ -333,9 +356,14 @@ theme_override_font_sizes/font_size = 22
 text = "Quest: There are no Quests
 "
 
+<<<<<<< Updated upstream
 [node name="Heart moniter" type="Control" parent="Main Ui"]
 clip_contents = true
 custom_minimum_size = Vector2(5, 5)
+=======
+[node name="Heart moniter" type="Control" parent="Main Ui" node_paths=PackedStringArray("fast1", "fast1connecthingonto", "fast2", "fast2connecthingonto")]
+clip_contents = true
+>>>>>>> Stashed changes
 anchors_preset = 0
 offset_left = 76.0
 offset_top = 530.0
@@ -343,8 +371,16 @@ offset_right = 93.17986
 offset_bottom = 546.41565
 scale = Vector2(3.8999147, 4.203303)
 script = ExtResource("11_c78sm")
+fast1 = NodePath("Regular3")
+fast1connecthingonto = NodePath("Regular3/ConnectThingonto")
+fast2 = NodePath("Regular4")
+fast2connecthingonto = NodePath("Regular4/ConnectThingonto")
 
+<<<<<<< Updated upstream
 [node name="Endpoint" type="Control" parent="Main Ui/Heart moniter"]
+=======
+[node name="Regular" type="Control" parent="Main Ui/Heart moniter"]
+>>>>>>> Stashed changes
 anchors_preset = 0
 offset_top = 26.0
 offset_right = 0.1
@@ -575,6 +611,12 @@ offset_top = 0.66441965
 offset_right = 44.45432
 offset_bottom = 0.76442003
 
+[node name="Endpoint" type="Control" parent="Main Ui/Heart moniter"]
+anchors_preset = 0
+offset_top = 26.0
+offset_right = 0.1
+offset_bottom = 26.099998
+
 [node name="Regular3" type="Control" parent="Main Ui/Heart moniter"]
 visible = false
 anchors_preset = 0
@@ -622,16 +664,26 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Panel6" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
 layout_mode = 0
+<<<<<<< Updated upstream
 offset_left = -1.1820183
 offset_top = 17.154112
 offset_right = 38.817986
 offset_bottom = 57.154114
 rotation = -2.6032255
 scale = Vector2(0.64603, 0.025406666)
+=======
+offset_left = -0.6609483
+offset_top = 17.475443
+offset_right = 39.339054
+offset_bottom = 57.47544
+rotation = -2.6032255
+scale = Vector2(0.727712, 0.02534464)
+>>>>>>> Stashed changes
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Panel7" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
 layout_mode = 0
+<<<<<<< Updated upstream
 offset_left = -21.484482
 offset_top = 3.480002
 offset_right = 18.515522
@@ -658,6 +710,14 @@ offset_right = -21.957829
 offset_bottom = 43.143227
 rotation = -3.771257
 scale = Vector2(0.59275, 0.025448823)
+=======
+offset_left = -23.474976
+offset_top = 2.4696608
+offset_right = 16.525028
+offset_bottom = 42.46966
+rotation = -3.7208576
+scale = Vector2(0.63338274, 0.025448823)
+>>>>>>> Stashed changes
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular3/Control"]
@@ -719,9 +779,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular3"]
 anchors_preset = 0
-offset_left = -164.54993
-offset_right = -164.44992
-offset_bottom = 0.099975586
+offset_left = -164.73665
+offset_top = -0.36458814
+offset_right = -164.63664
+offset_bottom = -0.26461256
 
 [node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular3"]
 anchors_preset = 0
@@ -746,10 +807,17 @@ offset_bottom = 23.1703
 [node name="Regular4" type="Control" parent="Main Ui/Heart moniter"]
 visible = false
 anchors_preset = 0
+<<<<<<< Updated upstream
 offset_left = 124.96676
 offset_top = 14.750307
 offset_right = 125.066734
 offset_bottom = 14.850283
+=======
+offset_left = 142.81442
+offset_top = 24.333206
+offset_right = 142.91443
+offset_bottom = 24.433182
+>>>>>>> Stashed changes
 scale = Vector2(-0.49255118, 0.9507002)
 
 [node name="Control" type="Control" parent="Main Ui/Heart moniter/Regular4"]
@@ -790,22 +858,40 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Panel4" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
 layout_mode = 0
+<<<<<<< Updated upstream
 offset_left = -2.108654
 offset_top = 16.517515
 offset_right = 37.891354
 offset_bottom = 56.51751
 rotation = -2.6032255
 scale = Vector2(0.64603, 0.025406666)
+=======
+offset_left = -0.7816582
+offset_top = 16.854294
+offset_right = 39.218346
+offset_bottom = 56.854294
+rotation = -2.6032255
+scale = Vector2(0.706694, 0.025406666)
+>>>>>>> Stashed changes
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Panel5" type="Panel" parent="Main Ui/Heart moniter/Regular4/Control"]
 layout_mode = 0
+<<<<<<< Updated upstream
 offset_left = -22.411118
 offset_top = 2.8434057
 offset_right = 17.588882
 offset_bottom = 42.843407
 rotation = -3.6951172
 scale = Vector2(0.66012675, 0.025448823)
+=======
+offset_left = -23.483023
+offset_top = 2.3574395
+offset_right = 16.516981
+offset_bottom = 42.35744
+rotation = -3.7235527
+scale = Vector2(0.6274994, 0.025448823)
+>>>>>>> Stashed changes
 theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="Control2" type="Control" parent="Main Ui/Heart moniter/Regular4"]
@@ -846,10 +932,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_c78sm")
 
 [node name="ConnectThingonto" type="Control" parent="Main Ui/Heart moniter/Regular4"]
 anchors_preset = 0
-offset_left = -164.761
-offset_top = 0.6644082
-offset_right = -164.661
-offset_bottom = 0.7644086
+offset_left = -164.54741
+offset_top = 0.67355525
+offset_right = -164.4474
+offset_bottom = 0.77355564
 
 [node name="ConnectOnto" type="Control" parent="Main Ui/Heart moniter/Regular4"]
 anchors_preset = 0
@@ -865,6 +951,16 @@ offset_top = 0.66441965
 offset_right = 44.45432
 offset_bottom = 0.76442003
 
+<<<<<<< Updated upstream
+=======
+[node name="Panel" type="Panel" parent="Main Ui"]
+material = SubResource("ShaderMaterial_erobn")
+layout_mode = 0
+offset_right = 1149.0
+offset_bottom = 646.0
+mouse_filter = 2
+
+>>>>>>> Stashed changes
 [node name="Node3D4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.889235, -0.6008241, 0)
 
